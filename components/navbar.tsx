@@ -321,7 +321,7 @@ export function Navbar() {
                 >
                   Log In
                 </a>
-                <Link href="https://console.usenubis.com/signup" className="hidden sm:block">
+                <Link href="https://console.usenubis.com/sign-up" className="hidden sm:block">
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}

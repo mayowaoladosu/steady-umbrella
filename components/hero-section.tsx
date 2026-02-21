@@ -80,7 +80,7 @@ export function HeroSection() {
         </motion.p>
 
         {/* CTA Button */}
-        <Link href="https://console.usenubis.com/sign-up">
+        <Link href="https://console.usenubis.com/dashboard">
           <motion.button
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
