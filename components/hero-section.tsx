@@ -1,13 +1,22 @@
 "use client"
 
 import { WorkflowDiagram } from "@/components/workflow-diagram"
+import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { useEvaluation } from '@croct/plug-react'
 
 const ease = [0.22, 1, 0.36, 1] as const
 
 export function HeroSection() {
+  const location = useEvaluation("location's continent", { initial: 'Global', fallback: 'Global' }) as string;
+
+  const edgeLocation =
+    location === 'Africa' ? 'Lagos edge' :
+      location === 'Europe' ? 'Frankfurt data center' :
+        'global edge network'
+
   return (
     <section className="relative w-full px-12 pt-6 pb-12 lg:px-24 lg:pt-10 lg:pb-16">
       <div className="flex flex-col items-center text-center">
@@ -19,7 +28,7 @@ export function HeroSection() {
           className="mb-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-foreground/20 bg-foreground/5 backdrop-blur-sm"
         >
           <Image
-            src="/yc-logo.png"
+            src="/images/yc-logo.png"
             alt="Y Combinator"
             width={20}
             height={20}
@@ -35,6 +44,7 @@ export function HeroSection() {
           transition={{ duration: 0.7, ease }}
           className="font-pixel text-4xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tight text-foreground mb-2 select-none"
         >
+          <span className="sr-only">Nubis Cloud Platform Africa - </span>
           DEPLOY. SCALE.
         </motion.h1>
 
@@ -48,16 +58,16 @@ export function HeroSection() {
           <WorkflowDiagram />
         </motion.div>
 
-        {/* Bottom headline: ROUTE. -- Geist Pixel Grid */}
-        <motion.h1
+        {/* Bottom headline: COMPUTE. -- Geist Pixel Grid */}
+        <motion.div
           initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.7, delay: 0.25, ease }}
           className="font-pixel text-4xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tight text-foreground mb-4 select-none"
           aria-hidden="true"
         >
-          ROUTE.
-        </motion.h1>
+          COMPUTE.
+        </motion.div>
 
         {/* Sub-headline */}
         <motion.p
@@ -66,31 +76,33 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.45, ease }}
           className="text-xs lg:text-sm text-muted-foreground max-w-md mb-6 leading-relaxed font-mono"
         >
-          SYS.INT is the deterministic deployment layer between your models and your users. Sub-5ms inference. Global edge routing. Full operational control.
+          High-performance cloud infrastructure designed for scale. Provision bare-metal compute, managed databases, and routing to our <span className="bg-foreground/10 px-1 py-0.5 rounded text-foreground">{edgeLocation}</span> in under 60 seconds.
         </motion.p>
 
         {/* CTA Button */}
-        <motion.button
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6, ease }}
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          className="group flex items-center gap-0 bg-foreground text-background text-sm font-mono tracking-wider uppercase"
-        >
-          <span className="flex items-center justify-center w-10 h-10 bg-[#ea580c]">
-            <motion.span
-              className="inline-flex"
-              whileHover={{ x: 3 }}
-              transition={{ type: "spring", stiffness: 400, damping: 20 }}
-            >
-              <ArrowRight size={16} strokeWidth={2} className="text-background" />
-            </motion.span>
-          </span>
-          <span className="px-5 py-2.5">
-            Request a Demo
-          </span>
-        </motion.button>
+        <Link href="https://console.usenubis.com/signup">
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6, ease }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="group flex items-center gap-0 bg-foreground text-background text-sm font-mono tracking-wider uppercase"
+          >
+            <span className="flex items-center justify-center w-10 h-10 bg-[#ea580c]">
+              <motion.span
+                className="inline-flex"
+                whileHover={{ x: 3 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              >
+                <ArrowRight size={16} strokeWidth={2} className="text-background" />
+              </motion.span>
+            </span>
+            <span className="px-5 py-2.5">
+              Try it now
+            </span>
+          </motion.button>
+        </Link>
       </div>
     </section>
   )

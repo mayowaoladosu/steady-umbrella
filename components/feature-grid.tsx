@@ -1,7 +1,7 @@
 "use client"
 
 import { TerminalCard } from "@/components/bento/terminal-card"
-import { DitherCard } from "@/components/bento/dither-card"
+import { GlobeCard } from "@/components/bento/globe-card"
 import { MetricsCard } from "@/components/bento/metrics-card"
 import { StatusCard } from "@/components/bento/status-card"
 import { motion } from "framer-motion"
@@ -51,13 +51,13 @@ export function FeatureGrid() {
           <TerminalCard />
         </motion.div>
 
-        {/* Dither */}
+        {/* Globe */}
         <motion.div
           custom={1}
           variants={cardVariants}
           className="border-b-2 md:border-b-0 border-foreground min-h-[280px]"
         >
-          <DitherCard />
+          <GlobeCard />
         </motion.div>
 
         {/* Metrics */}

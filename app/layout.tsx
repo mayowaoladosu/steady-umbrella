@@ -1,7 +1,10 @@
 import type { Metadata, Viewport } from 'next'
+import Script from 'next/script'
 import { JetBrains_Mono } from 'next/font/google'
 import { GeistPixelGrid } from 'geist/font/pixel'
 import { ThemeProvider } from '@/components/theme-provider'
+import { CroctProvider } from '@/components/croct-provider'
+import { IntercomProvider } from '@/components/intercom'
 
 import './globals.css'
 
@@ -11,32 +14,24 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Brutalist AI SaaS Landing Page Template | Engineering-Grade Dark UI Kit',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
+  title: 'Nubis | The Modern Cloud Platform',
   description:
-    'A brutalist, engineering-themed landing page template for AI infrastructure and SaaS products. Features Geist Pixel typography, dot-grid backgrounds, live terminal animations, scramble-text micro-interactions, bento feature grids, isometric 3D illustrations, and a fully responsive dark industrial design system. Built with Next.js 16, Tailwind CSS, and Framer Motion.',
+    'Nubis is a modern cloud platform offering App Platform, Databases, instances, Firewalls, Kubernetes, and Core infrastructure natively.',
   keywords: [
-    'brutalist landing page template',
-    'AI SaaS template',
-    'engineering UI kit',
-    'Next.js landing page',
-    'Tailwind CSS template',
-    'dark UI template',
-    'Geist Pixel font',
-    'bento grid layout',
-    'SaaS pricing page',
-    'Framer Motion animations',
-    'monospace design system',
-    'developer landing page',
-    'AI infrastructure template',
-    'industrial web design',
-    'dot matrix typography',
-    'terminal UI components',
-    'startup landing page',
-    'tech landing page template',
+    'nubis',
+    'cloud platform nigeria',
+    'african cloud provider',
+    'app platform',
+    'kubernetes lagos',
+    'managed databases africa',
+    'infrastructure',
+    'aws alternative africa',
+    'cloud hosting nigeria',
   ],
-  authors: [{ name: 'SYS.INT' }],
-  creator: 'System Intelligence Corp.',
-  publisher: 'System Intelligence Corp.',
+  authors: [{ name: 'Nubis' }],
+  creator: 'Nubis',
+  publisher: 'Nubis',
   robots: {
     index: true,
     follow: true,
@@ -51,17 +46,36 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    title: 'Brutalist AI SaaS Landing Page Template | Engineering-Grade Dark UI Kit',
+    title: 'Nubis | The Modern Cloud Platform',
     description:
-      'A brutalist, engineering-themed landing page template for AI and SaaS products. Geist Pixel typography, terminal animations, bento grids, scramble-text effects, and a full industrial design system. Next.js 16 + Tailwind CSS + Framer Motion.',
-    siteName: 'SYS.INT Template',
+      'Nubis is a modern cloud platform offering App Platform, Databases, instances, Firewalls, Kubernetes, and Core infrastructure natively.',
+    siteName: 'Nubis',
+    images: [{
+      url: '/images/og-image.png',
+      width: 1200,
+      height: 630,
+      alt: 'Nubis Cloud Platform',
+    }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Brutalist AI SaaS Landing Page Template',
+    title: 'Nubis | The Modern Cloud Platform',
     description:
-      'Engineering-grade brutalist template for AI SaaS products. Dot-grid backgrounds, live terminal animations, Geist Pixel typography, bento feature grids, and scramble-text micro-interactions. Built with Next.js 16.',
-    creator: '@sysint',
+      'Nubis is a modern cloud platform offering App Platform, Databases, instances, Firewalls, Kubernetes, and Core infrastructure natively.',
+    creator: '@usenubis',
+    images: [{
+      url: '/images/og-image.png',
+      width: 1200,
+      height: 630,
+      alt: 'Nubis Cloud Platform',
+    }],
+  },
+  alternates: {
+    canonical: process.env.NEXT_PUBLIC_APP_URL || 'https://usenubis.com',
+  },
+  icons: {
+    icon: '/images/logo/nubis_icon_white_transparent.png',
+    apple: '/images/logo/nubis_icon_white_transparent.png',
   },
   category: 'technology',
 }
@@ -78,11 +92,31 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Nubis',
+    url: process.env.NEXT_PUBLIC_APP_URL || 'https://usenubis.com',
+    logo: `${process.env.NEXT_PUBLIC_APP_URL || 'https://usenubis.com'}/images/logo/brandmark-dark.svg`,
+    description: 'Nubis is an African-born cloud hosting platform providing modern infrastructure, managed databases, and scalable App Platform services.',
+    areaServed: ['Nigeria', 'Africa', 'Global'],
+    sameAs: [
+      'https://twitter.com/usenubis'
+    ]
+  }
+
   return (
     <html lang="en" className={`${jetbrainsMono.variable} ${GeistPixelGrid.variable}`} suppressHydrationWarning>
       <body className="font-mono antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
-          {children}
+          <CroctProvider>
+            {children}
+            <IntercomProvider />
+          </CroctProvider>
         </ThemeProvider>
       </body>
     </html>

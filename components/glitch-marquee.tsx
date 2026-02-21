@@ -5,24 +5,26 @@ import { motion } from "framer-motion"
 const ease = [0.22, 1, 0.36, 1] as const
 
 const PARTNERS = [
-  "OPENAI",
-  "ANTHROPIC",
-  "GOOGLE",
-  "META",
-  "NVIDIA",
-  "MISTRAL",
-  "COHERE",
-  "STABILITY",
-  "DEEPMIND",
-  "HUGGING FACE",
+  "KUBERNETES",
+  "DOCKER",
+  "LINUX",
+  "RUST",
+  "POSTGRESQL",
+  "REDIS",
+  "UBUNTU",
+  "TERRAFORM",
+  "GRAFANA",
+  "PROMETHEUS",
+  "PAYSTACK",
+  "DIGITALOCEAN",
+  "VERCEL",
 ]
 
 function LogoBlock({ name, glitch }: { name: string; glitch: boolean }) {
   return (
     <div
-      className={`flex items-center justify-center px-8 py-4 border-r-2 border-foreground shrink-0 ${
-        glitch ? "animate-glitch" : ""
-      }`}
+      className={`flex items-center justify-center px-8 py-4 border-r-2 border-foreground shrink-0 ${glitch ? "animate-glitch" : ""
+        }`}
     >
       <span className="text-sm font-mono tracking-[0.15em] uppercase text-foreground whitespace-nowrap">
         {name}
@@ -45,10 +47,10 @@ export function GlitchMarquee() {
         className="flex items-center gap-4 mb-8"
       >
         <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
-          {"// PARTNERS: MODEL_ECOSYSTEM"}
+          {"// PARTNERS: CLOUD_ECOSYSTEM"}
         </span>
         <div className="flex-1 border-t border-border" />
-        <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">008</span>
+        <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">009</span>
       </motion.div>
 
       {/* Marquee */}

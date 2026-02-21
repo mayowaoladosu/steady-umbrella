@@ -3,8 +3,8 @@
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 
-const LEFT_LABELS = ["Train", "Package", "Version"]
-const RIGHT_LABELS = ["Route", "Deploy", "Observe"]
+const LEFT_LABELS = ["Build", "Package", "Push"]
+const RIGHT_LABELS = ["Deploy", "Scale", "Monitor"]
 
 function PillLabel({
   label,

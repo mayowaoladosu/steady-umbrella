@@ -3,21 +3,21 @@
 import { useEffect, useState } from "react"
 
 const LOG_LINES = [
-  "> Initializing AI pipeline...",
-  "> Loading model weights: 2.4GB",
-  "> Connecting to data stream...",
-  "> Analyzing codebase...",
-  "> Running inference: batch_01",
-  "> Optimization pass: 1/3",
-  "> Optimization pass: 2/3",
-  "> Optimization pass: 3/3",
-  "> 98% Optimized",
-  "> Deploying to edge nodes...",
+  "> Allocating IP block...",
+  "> Provisioning bare-metal node...",
+  "> Connecting to storage backend...",
+  "> Configuring VPC routing...",
+  "> Running health checks: test_01",
+  "> Node bootstrapping: 1/3",
+  "> Node bootstrapping: 2/3",
+  "> Node bootstrapping: 3/3",
+  "> 98% Configured",
+  "> Propagating to edge DNS...",
   "> Status: OPERATIONAL",
   "> Latency: 12ms p99",
-  "> Throughput: 14.2k req/s",
-  "> Memory: 847MB / 2048MB",
-  "> --------- CYCLE COMPLETE ---------",
+  "> Network throughput: 14.2Gbps",
+  "> Memory: 1.2TB / 2.0TB",
+  "> --------- DEPLOY COMPLETE ---------",
 ]
 
 export function TerminalCard() {

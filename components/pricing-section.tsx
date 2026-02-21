@@ -55,7 +55,7 @@ function StatusLine() {
   return (
     <div className="flex items-center gap-2 text-[10px] tracking-widest text-muted-foreground uppercase font-mono">
       <span className="h-1.5 w-1.5 bg-[#ea580c]" />
-      <span>live throughput: {throughput}k req/s</span>
+      <span>network throughput: {throughput} Gbps</span>
     </div>
   )
 }
@@ -85,11 +85,11 @@ const TIERS: Tier[] = [
     price: "0",
     period: "/ forever",
     tag: null,
-    description: "Community-grade inference. Rate-limited. No SLA.",
+    description: "Community-grade infrastructure. Rate-limited. No SLA.",
     features: [
-      { text: "10K requests / month", included: true },
-      { text: "Community models", included: true },
-      { text: "Shared compute pool", included: true },
+      { text: "1 Shared vCPU (Micro)", included: true },
+      { text: "1GB RAM / 20GB SSD", included: true },
+      { text: "Shared outbound pool", included: true },
       { text: "Single region", included: true },
       { text: "Priority routing", included: false },
       { text: "Dedicated support", included: false },
@@ -105,10 +105,10 @@ const TIERS: Tier[] = [
     tag: "RECOMMENDED",
     description: "Production-grade. Sub-5ms latency. 99.97% uptime SLA.",
     features: [
-      { text: "Unlimited requests", included: true },
-      { text: "All 147 foundation models", included: true },
+      { text: "Unlimited instances", included: true },
+      { text: "All architecture types (ARM/x86)", included: true },
       { text: "Dedicated compute", included: true },
-      { text: "12-region edge deployment", included: true },
+      { text: "4-region edge deployment", included: true },
       { text: "Priority routing", included: true },
       { text: "Dedicated support", included: false },
     ],
@@ -124,9 +124,9 @@ const TIERS: Tier[] = [
     description: "Air-gapped. On-prem. Full operational control.",
     features: [
       { text: "Unlimited everything", included: true },
-      { text: "Custom model fine-tuning", included: true },
+      { text: "Custom hardware configuration", included: true },
       { text: "Dedicated cluster", included: true },
-      { text: "50+ edge regions", included: true },
+      { text: "4+ edge regions", included: true },
       { text: "Custom SLA", included: true },
       { text: "24/7 dedicated engineering", included: true },
     ],
@@ -145,17 +145,15 @@ function PricingCard({ tier, index }: { tier: Tier; index: number }) {
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ delay: index * 0.12, duration: 0.6, ease }}
-      className={`flex flex-col h-full ${
-        tier.highlighted
+      className={`flex flex-col h-full ${tier.highlighted
           ? "border-2 border-foreground bg-foreground text-background"
           : "border-2 border-foreground bg-background text-foreground"
-      }`}
+        }`}
     >
       {/* Card header */}
       <div
-        className={`flex items-center justify-between px-5 py-3 border-b-2 ${
-          tier.highlighted ? "border-background/20" : "border-foreground"
-        }`}
+        className={`flex items-center justify-between px-5 py-3 border-b-2 ${tier.highlighted ? "border-background/20" : "border-foreground"
+          }`}
       >
         <span className="text-[10px] tracking-[0.2em] uppercase font-mono">
           {tier.name}
@@ -184,18 +182,16 @@ function PricingCard({ tier, index }: { tier: Tier; index: number }) {
           )}
           {tier.period && (
             <span
-              className={`text-xs font-mono tracking-widest uppercase ${
-                tier.highlighted ? "text-background/50" : "text-muted-foreground"
-              }`}
+              className={`text-xs font-mono tracking-widest uppercase ${tier.highlighted ? "text-background/50" : "text-muted-foreground"
+                }`}
             >
               {tier.period}
             </span>
           )}
         </div>
         <p
-          className={`text-xs font-mono mt-3 leading-relaxed ${
-            tier.highlighted ? "text-background/60" : "text-muted-foreground"
-          }`}
+          className={`text-xs font-mono mt-3 leading-relaxed ${tier.highlighted ? "text-background/60" : "text-muted-foreground"
+            }`}
         >
           {tier.description}
         </p>
@@ -203,9 +199,8 @@ function PricingCard({ tier, index }: { tier: Tier; index: number }) {
 
       {/* Feature list */}
       <div
-        className={`flex-1 px-5 py-4 border-t-2 ${
-          tier.highlighted ? "border-background/20" : "border-foreground"
-        }`}
+        className={`flex-1 px-5 py-4 border-t-2 ${tier.highlighted ? "border-background/20" : "border-foreground"
+          }`}
       >
         <div className="flex flex-col gap-3">
           {tier.features.map((feature, fi) => (
@@ -227,19 +222,17 @@ function PricingCard({ tier, index }: { tier: Tier; index: number }) {
                 <Minus
                   size={12}
                   strokeWidth={2}
-                  className={`mt-0.5 shrink-0 ${
-                    tier.highlighted ? "text-background/30" : "text-muted-foreground/40"
-                  }`}
+                  className={`mt-0.5 shrink-0 ${tier.highlighted ? "text-background/30" : "text-muted-foreground/40"
+                    }`}
                 />
               )}
               <span
-                className={`text-xs font-mono leading-relaxed ${
-                  feature.included
+                className={`text-xs font-mono leading-relaxed ${feature.included
                     ? ""
                     : tier.highlighted
-                    ? "text-background/30 line-through"
-                    : "text-muted-foreground/40 line-through"
-                }`}
+                      ? "text-background/30 line-through"
+                      : "text-muted-foreground/40 line-through"
+                  }`}
               >
                 {feature.text}
               </span>
@@ -253,11 +246,10 @@ function PricingCard({ tier, index }: { tier: Tier; index: number }) {
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.97 }}
-          className={`group w-full flex items-center justify-center gap-0 text-xs font-mono tracking-wider uppercase ${
-            tier.highlighted
+          className={`group w-full flex items-center justify-center gap-0 text-xs font-mono tracking-wider uppercase ${tier.highlighted
               ? "bg-background text-foreground"
               : "bg-foreground text-background"
-          }`}
+            }`}
         >
           <span className="flex items-center justify-center w-9 h-9 bg-[#ea580c]">
             <ArrowRight size={14} strokeWidth={2} className="text-background" />
@@ -304,7 +296,7 @@ export function PricingSection() {
             Select your compute tier
           </h2>
           <p className="text-xs lg:text-sm font-mono text-muted-foreground leading-relaxed max-w-md">
-            All tiers include zero-config deploys, built-in monitoring, and access to the SYS.INT inference API.
+            All tiers include zero-config deploys, built-in monitoring, and access to the internal network API.
           </p>
         </div>
         <StatusLine />

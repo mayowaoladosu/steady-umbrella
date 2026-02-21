@@ -76,20 +76,26 @@ function UptimeCounter() {
 
 /* ── stat block ── */
 const STATS = [
-  { label: "MODELS_DEPLOYED", value: "147" },
-  { label: "EDGE_REGIONS", value: "50+" },
-  { label: "INFERENCE_CALLS", value: "12.8B" },
+  { label: "VMS_PROVISIONED", value: "147K" },
+  { label: "REGIONS_SERVED", value: "9" },
+  { label: "PETABYTES_SERVED", value: "12.8P" },
   { label: "AVG_LATENCY", value: "4.2ms" },
 ]
 
 function StatBlock({ label, value, index }: { label: string; value: string; index: number }) {
+  const borderClass =
+    index === 0 ? "border-b-2 border-r-2" :
+      index === 1 ? "border-b-2" :
+        index === 2 ? "border-r-2" :
+          "";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
       whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true, margin: "-30px" }}
       transition={{ delay: 0.15 + index * 0.08, duration: 0.5, ease }}
-      className="flex flex-col gap-1 border-2 border-foreground px-4 py-3"
+      className={`flex flex-col gap-1 px-4 py-3 border-foreground ${borderClass}`}
     >
       <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-mono">
         {label}
@@ -113,12 +119,11 @@ export function AboutSection() {
         transition={{ duration: 0.5, ease }}
         className="flex items-center gap-4 mb-8"
       >
-        <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-mono">
-          {"// SECTION: ABOUT_SYS.INT"}
+        <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
+          {"// SECTION: ABOUT_NUBIS"}
         </span>
         <div className="flex-1 border-t border-border" />
-        <BlinkDot />
-        <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground font-mono">
+        <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground">
           005
         </span>
       </motion.div>
@@ -144,8 +149,8 @@ export function AboutSection() {
           </div>
 
           <Image
-            src="/images/about-isometric.jpg"
-            alt="Isometric view of AI infrastructure with server racks and data pipelines"
+            src="/images/about-isometric.webp"
+            alt="Isometric view of cloud infrastructure with server racks and data pipelines"
             fill
             className="object-cover"
             sizes="(max-width: 1024px) 100vw, 50vw"
@@ -193,7 +198,7 @@ export function AboutSection() {
               >
                 Infrastructure built for
                 <br />
-                <span className="text-[#ea580c]">raw intelligence</span>
+                <span className="text-[#ea580c]">Global scale</span>
               </motion.h2>
 
               <motion.div
@@ -204,14 +209,13 @@ export function AboutSection() {
                 className="flex flex-col gap-4"
               >
                 <p className="text-xs lg:text-sm font-mono text-muted-foreground leading-relaxed">
-                  We engineer the substrate layer that sits between your models
-                  and your users. No abstractions. No magic. Just deterministic
-                  routing, sub-5ms inference, and transparent operational control
-                  across every edge node in the network.
+                  We engineer the core infrastructure layer that powers your applications.
+                  No magic. Just deterministic routing, high-performance NVMe storage,
+                  and transparent operational control across every data center in our network.
                 </p>
                 <p className="text-xs lg:text-sm font-mono text-muted-foreground leading-relaxed">
                   Founded by systems engineers who spent a decade building
-                  distributed compute at hyperscale. We believe AI infrastructure
+                  distributed compute at hyperscale. We believe cloud infrastructure
                   should be inspectable, auditable, and brutally fast.
                 </p>
               </motion.div>
@@ -234,7 +238,7 @@ export function AboutSection() {
             </div>
 
             {/* Stats grid */}
-            <div className="grid grid-cols-2 gap-0 mt-6">
+            <div className="grid grid-cols-2 gap-0 mt-6 border-2 border-foreground">
               {STATS.map((stat, i) => (
                 <StatBlock key={stat.label} {...stat} index={i} />
               ))}
