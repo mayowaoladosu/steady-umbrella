@@ -5,6 +5,7 @@ import { GeistPixelGrid } from 'geist/font/pixel'
 import { ThemeProvider } from '@/components/theme-provider'
 import { CroctProvider } from '@/components/croct-provider'
 import { IntercomProvider } from '@/components/intercom'
+import { Analytics } from '@vercel/analytics/next'
 
 import './globals.css'
 
@@ -118,6 +119,7 @@ export default function RootLayout({
             <IntercomProvider />
           </CroctProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
