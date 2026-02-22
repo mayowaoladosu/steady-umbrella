@@ -1,16 +1,19 @@
 import type { Metadata, Viewport } from 'next'
-import Script from 'next/script'
 import { JetBrains_Mono } from 'next/font/google'
 import { GeistPixelGrid } from 'geist/font/pixel'
 import { ThemeProvider } from '@/components/theme-provider'
 import { CroctProvider } from '@/components/croct-provider'
 import { IntercomProvider } from '@/components/intercom'
 import { Analytics } from '@vercel/analytics/next'
+import { AnalyticsConsentManager } from '@/components/analytics-consent-manager'
 
 import './globals.css'
 
-const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID
-const SHOULD_ENABLE_GOOGLE_ANALYTICS = process.env.NODE_ENV === 'production' && Boolean(GOOGLE_ANALYTICS_ID)
+const rawGoogleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID
+const GOOGLE_ANALYTICS_ID = /^G-[A-Z0-9]{10}$/i.test(rawGoogleAnalyticsId ?? '') ? rawGoogleAnalyticsId : undefined
+const IS_PRODUCTION_DEPLOYMENT =
+  process.env.NODE_ENV === 'production' && (process.env.VERCEL_ENV === undefined || process.env.VERCEL_ENV === 'production')
+const SHOULD_ENABLE_GOOGLE_ANALYTICS = IS_PRODUCTION_DEPLOYMENT && Boolean(GOOGLE_ANALYTICS_ID)
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
@@ -112,21 +115,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jetbrainsMono.variable} ${GeistPixelGrid.variable}`} suppressHydrationWarning>
       <body className="font-mono antialiased">
-        {SHOULD_ENABLE_GOOGLE_ANALYTICS && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GOOGLE_ANALYTICS_ID}');
-              `}
-            </Script>
-          </>
+        {SHOULD_ENABLE_GOOGLE_ANALYTICS && GOOGLE_ANALYTICS_ID && (
+          <AnalyticsConsentManager analyticsId={GOOGLE_ANALYTICS_ID} />
         )}
         <script
           type="application/ld+json"
