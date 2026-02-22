@@ -1,0 +1,98 @@
+---
+title: "How We Built Local Currency Billing for Cloud Infrastructure"
+slug: "how-we-built-local-currency-billing"
+date: "2026-02-15"
+author: "Nubis Team"
+authorRole: "Payments Engineering"
+category: "Company"
+tags: ["billing", "currency", "ngn", "kes", "payments", "fintech", "africa"]
+excerpt: "Cloud providers charge in USD. African developers pay in local currency. The gap between those two facts costs startups thousands of dollars a year in hidden conversion fees. Here's how we closed it."
+coverImage: "/images/blog/currency-cover.png"
+featured: false
+---
+
+## The Hidden Cost of Dollar Billing
+
+If you're a Nigerian startup running cloud infrastructure, here's what happens every month when your AWS bill comes due:
+
+1. AWS charges your card in USD
+2. Your Nigerian bank converts NGN to USD at their own exchange rate (not the CBN rate — their rate, which is typically 2-4% worse)
+3. Your bank adds an international transaction fee (usually 1-3.5%)
+4. If your card is declined due to FX limits, you scramble to find an alternative payment method
+
+By the time the money reaches AWS, you've paid 3-7% more than the sticker price. On a $500/month infrastructure bill, that's $180-$420/year lost purely to the payment pipeline.
+
+Multiply this across the thousands of African startups building on hyperscale providers, and the aggregate cost of dollar-denominated billing is staggering.
+
+## Our Approach
+
+When we started building Nubis, local currency billing wasn't a nice-to-have feature — it was a core architectural requirement. We wanted African developers to see prices in their currency, pay with their local payment methods, and never think about exchange rates.
+
+Here's how the system works:
+
+### Real-Time Exchange Rate Engine
+
+We built a pricing engine that fetches exchange rates from multiple institutional FX sources every 10 minutes. The rates are weighted and averaged to produce a fair mid-market rate that we apply uniformly.
+
+Key design decisions:
+
+- **No markup on exchange rates** — we apply the mid-market rate directly. Our margin comes from our infrastructure pricing, not from FX arbitrage
+- **Rate locking at billing time** — when your invoice is generated, the rate is locked for 24 hours. No surprises between when you see the bill and when you pay it
+- **Transparent rate display** — the current exchange rate is always visible in your billing dashboard. You can see exactly how we calculated every line item
+
+### Payment Integration
+
+We integrated with Paystack for African payment processing. This gives our users:
+
+- **Direct NGN and KES charges** — no international transaction, no FX fees from your bank
+- **Multiple payment methods** — bank transfer, card payment, USSD — whatever works for you
+- **Automated billing** — set up auto-pay and never worry about infrastructure going down because of a payment failure
+
+### Pricing Architecture
+
+Internally, all our resource pricing is calculated in USD (since our upstream infrastructure costs are dollar-denominated). The conversion happens at the presentation and billing layer:
+
+1. Resource cost is calculated in USD using our standardized formulas
+2. At display time, the current exchange rate is applied to show the local currency equivalent
+3. At billing time, the rate is locked and the local currency amount is charged
+4. Our accounting reconciles the local currency payments against USD costs at the actual monthly average rate
+
+This means the price you see on the pricing calculator is accurate to within 10 minutes of the current market rate.
+
+## The Technical Challenges
+
+Building this wasn't trivial. Some of the problems we had to solve:
+
+### Rate Volatility
+
+The NGN/USD rate can fluctuate significantly within a single day. Early versions of our pricing engine would show different prices for the same resource within hours, which confused users. We solved this by implementing rate smoothing — using a rolling 4-hour weighted average that dampens short-term volatility while still tracking the market direction.
+
+### Precision and Rounding
+
+Cloud pricing involves very small numbers (fractions of a cent per hour). When you convert these to NGN, rounding errors compound. A 0.5 kobo rounding error on an hourly charge becomes ₦360 over a month. We handle all calculations in integer arithmetic (storing prices as the smallest currency unit) and only round at the final display step.
+
+### Multi-Currency Reconciliation
+
+Our accounting system needs to track revenue in multiple currencies while our costs are predominantly in USD. We built a reconciliation pipeline that:
+
+- Records every transaction in both the local currency and the USD equivalent at the transaction-time rate
+- Generates daily FX gain/loss reports
+- Ensures our USD-denominated costs are always covered regardless of rate movements
+
+## Results
+
+Since launching local currency billing:
+
+- **Payment failure rate dropped 73%** — no more declined international transactions
+- **Average time-to-first-deploy decreased by 40%** — removing payment friction means developers get to building faster
+- **Zero FX-related support tickets** — transparency in pricing eliminated an entire category of customer complaints
+
+## What's Next
+
+We're expanding local currency support to additional African currencies as we grow into new markets. GHS (Ghana Cedi) and ZAR (South African Rand) are next on the roadmap.
+
+We're also building invoice financing for startups that need to smooth their infrastructure costs — pay monthly but get invoiced quarterly, with no interest for qualifying companies.
+
+If you're tired of paying the dollar tax on your cloud infrastructure, Nubis bills in your currency. No conversion fees, no surprises.
+
+Try it at [console.usenubis.com](https://console.usenubis.com).

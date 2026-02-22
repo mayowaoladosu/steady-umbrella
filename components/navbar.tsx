@@ -28,6 +28,7 @@ const PLATFORM_ITEMS = {
 }
 
 const RESOURCES_ITEMS = [
+  { label: "Blog", desc: "Engineering journal & updates", href: "/blog", icon: Terminal },
   { label: "API Documentation", desc: "Full REST & SDK references", href: "https://docs.usenubis.com", icon: BookOpen, external: true },
   { label: "Pricing Calculator", desc: "Estimate your infrastructure costs", href: "/pricing", icon: Calculator },
   { label: "System Status", desc: "Live uptime and incident tracking", href: "https://status.usenubis.com", icon: Activity, external: true },

@@ -1,0 +1,86 @@
+---
+title: "Why African Startups Should Stop Defaulting to AWS"
+slug: "why-african-startups-should-stop-defaulting-to-aws"
+date: "2026-02-18"
+author: "Nubis Team"
+authorRole: "Infrastructure Engineering"
+category: "Engineering"
+tags: ["cloud", "africa", "infrastructure", "latency", "aws-alternative"]
+excerpt: "The default choice of AWS, GCP, or Azure is costing African startups more than money. It's costing them performance, user experience, and ultimately — growth."
+coverImage: "/images/blog/aws-africa-cover.png"
+featured: false
+---
+
+## The Latency Tax
+
+Here's a number that should concern every African startup founder: **180 milliseconds**.
+
+That's the average round-trip time from Lagos to the nearest AWS region in Europe (eu-west-1, Ireland). For a typical web application that makes 4-6 API calls to render a page, that's nearly a full second of waiting. Just from network latency. Before your server even starts processing the request.
+
+For comparison, a user in New York connecting to us-east-1 experiences approximately 5-15ms of latency. Users in Mumbai hitting ap-south-1 see around 20ms. African users are paying a 10x latency penalty for every interaction with their application.
+
+This isn't a minor inconvenience. Google's research has consistently shown that every 100ms of added latency reduces conversion rates by up to 7%. For an African fintech processing transactions, that means real revenue lost to physics.
+
+## The Cost Problem
+
+Beyond latency, the cost structure of hyperscale cloud providers is fundamentally misaligned with African startup economics.
+
+Consider a standard production stack on AWS:
+
+- 2x t3.medium instances (application servers): ~$60/month
+- 1x RDS db.t3.medium (managed PostgreSQL): ~$50/month
+- Application Load Balancer: ~$22/month + data processing fees
+- NAT Gateway: ~$45/month + data processing fees
+- Data transfer out: $0.09/GB after first 100GB
+
+The sticker price looks reasonable until you factor in:
+
+- **Currency conversion fees** — paying in USD from NGN or KES means absorbing 2-4% conversion costs on every bill
+- **Data transfer costs** — egress pricing is opaque and compounds quickly with African traffic patterns where CDN coverage is limited
+- **Support costs** — AWS Business Support starts at $100/month or 10% of spend, whichever is higher
+
+A comparable stack on Nubis costs approximately 30-40% less when factoring in local currency billing, included egress, and the absence of hidden surcharges like NAT Gateway fees.
+
+## The Compliance Consideration
+
+Data residency regulations are tightening across Africa. Nigeria's NDPR (Nigeria Data Protection Regulation), Kenya's Data Protection Act, and South Africa's POPIA all include provisions around data sovereignty and localization.
+
+Running your infrastructure in Ireland or Frankfurt creates a regulatory surface area that grows more complex every year. As these regulations mature and enforcement increases, startups that assumed "cloud means anywhere" may find themselves scrambling to repatriate data and infrastructure.
+
+Building on infrastructure that operates within Africa from day one eliminates this category of risk entirely.
+
+## When AWS Does Make Sense
+
+We're not arguing that AWS, GCP, and Azure are bad platforms — they're engineering marvels. They make sense when:
+
+- Your primary user base is in the US, Europe, or Asia
+- You need specific managed services that don't have equivalents elsewhere (SageMaker, BigQuery, etc.)
+- You're operating at a scale where you've negotiated enterprise pricing and have a dedicated AWS account team
+- Regulatory requirements mandate a specific cloud provider
+
+But if you're building a product for African users, the default should be African infrastructure. Not because of ideology, but because of physics, economics, and regulatory pragmatism.
+
+## The Alternative
+
+Nubis was built specifically for this problem. Our infrastructure provides:
+
+- **Sub-30ms latency** from Lagos and reducing as we expand edge locations
+- **Managed databases** (PostgreSQL, MySQL, Redis, MongoDB) running on African soil
+- **Local currency billing** in NGN and KES — no conversion fees, no exchange rate surprises
+- **Transparent pricing** with egress included — the price you see is what you pay
+- **API-first infrastructure** — everything is automatable, from VM provisioning to DNS management
+
+We're not trying to replace AWS for everyone. We're building the infrastructure layer that African applications should have had from the beginning.
+
+## Making the Switch
+
+If you're currently running on a hyperscale provider and considering the move, here's the practical path:
+
+1. **Start with non-critical workloads** — staging environments, internal tools, or new microservices
+2. **Benchmark your specific latency profile** — measure round-trip times from your actual user locations to both your current provider and Nubis
+3. **Calculate your true cost** — include currency conversion, data transfer, and support in the comparison
+4. **Migrate incrementally** — use DNS-based routing to shift traffic gradually
+
+We offer migration support for startups making the transition. Reach out to our engineering team at [console.usenubis.com](https://console.usenubis.com) and we'll help you plan the move.
+
+The latency tax is optional. Stop paying it.

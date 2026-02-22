@@ -17,6 +17,7 @@ const FOOTER_LINKS = {
     { label: "Global Edge DNS", href: "/dns" },
   ],
   Resources: [
+    { label: "Blog", href: "/blog" },
     { label: "API Documentation", href: "https://docs.usenubis.com" },
     { label: "Pricing Calculator", href: "/pricing" },
     { label: "Status Page", href: "https://status.usenubis.com" },

@@ -1,0 +1,79 @@
+---
+title: "Introducing Nubis App Platform: Git Push, App Live"
+slug: "introducing-nubis-app-platform"
+date: "2026-02-20"
+author: "Nubis Team"
+authorRole: "Engineering"
+category: "Product"
+tags: ["app-platform", "paas", "deployment", "github", "africa"]
+excerpt: "Today we're launching Nubis App Platform — the fastest way to deploy web applications in Africa. Push your code, and we handle the rest: builds, SSL, CDN, and auto-scaling."
+coverImage: "/images/blog/app-platform-cover.png"
+featured: true
+---
+
+## The Problem We're Solving
+
+Every African startup building software faces the same friction: deploying to production is unnecessarily painful. You spin up a VM somewhere in Europe or the US, SSH in, configure Nginx, set up SSL certificates, build a CI pipeline, and pray the deployment doesn't break at 2 AM.
+
+Meanwhile, your users in Lagos, Nairobi, or Accra are experiencing 200-400ms of added latency on every single request because the nearest server is 5,000 kilometers away.
+
+We built the Nubis App Platform to eliminate this entire problem.
+
+## What is Nubis App Platform?
+
+Nubis App Platform is a fully managed Platform-as-a-Service that automatically builds and deploys your web applications directly from GitHub. You connect your repository, we handle everything else:
+
+- **Automatic builds** from your GitHub repository
+- **Zero-config SSL** certificates provisioned and renewed automatically
+- **Global CDN** with edge nodes across Africa
+- **Atomic deploys** with instant rollback capability
+- **Auto-scaling** that responds to traffic spikes in real-time
+
+There's no Dockerfile to write. No Kubernetes manifests to maintain. No YAML files to debug at midnight.
+
+## How It Works
+
+The deployment workflow is deliberately simple:
+
+1. Connect your GitHub repository to Nubis App Platform
+2. Select your branch and framework (we auto-detect Next.js, React, Vue, Python, Go, and more)
+3. Push your code
+4. Your app is live on a `.usenubis.com` subdomain with SSL in under 90 seconds
+
+Every subsequent push to your configured branch triggers an automatic build and deploy. Failed builds don't affect your running application — we only promote successful deployments.
+
+## Built for African Developers
+
+This isn't a generic PaaS that happens to serve Africa. We've made specific engineering decisions to optimize for developers on the continent:
+
+- **Lagos edge deployment** — sub-30ms latency for West African users
+- **Local currency billing** — pay in NGN, KES, or EUR without conversion fees or surprise exchange rate fluctuations
+- **Optimized for African network conditions** — our build servers and CDN are tuned for the bandwidth and routing characteristics of African ISPs
+- **Paystack integration** — pay with the payment methods you already use
+
+## Pricing
+
+App Platform follows the same transparent pricing model as the rest of Nubis infrastructure. The base tier starts at $5/month per app and includes:
+
+- 512MB RAM
+- Shared CPU
+- 100GB bandwidth
+- Automatic SSL
+- Custom domains
+
+Scaling from there is linear and predictable — no surprise bills from traffic spikes.
+
+## What's Next
+
+App Platform is currently in beta with early access for registered users. We're actively building out additional features including:
+
+- **Preview deployments** for pull requests
+- **Environment management** (staging, production) per branch
+- **Integrated monitoring** with our existing metrics infrastructure
+- **Database auto-provisioning** — spin up a managed PostgreSQL or Redis alongside your app with one click
+
+## Get Started
+
+If you're building a web application that serves African users, the App Platform is the fastest path from code to production. No infrastructure expertise required.
+
+Head to [console.usenubis.com](https://console.usenubis.com/app-platform/create) to deploy your first project.
