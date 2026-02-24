@@ -1,0 +1,43 @@
+# Nubis Marketing Website
+
+The public-facing brand presence and customer acquisition platform for Nubis Cloud.
+
+## Overview
+The Nubis website provides information about the platform's services, pricing, and infrastructure benefits. It serves as the primary landing page for new users and organizations.
+
+## Tech Stack
+- **Framework**: Next.js 16.1.6 (App Router)
+- **Language**: TypeScript 5.7
+- **Styling**: Tailwind CSS 3.4
+- **Animations**: Framer Motion 12.x
+- **Components**: Radix UI, Lucide Icons, Geist Font
+- **Content**: MDX (via `next-mdx-remote`)
+- **Analytics**: Vercel Analytics
+
+## Key Pages
+- **Home**: Core value proposition and platform overview.
+- **Pricing**: Subscription tiers and cost transparency.
+- **Blog**: Industry insights, technical guides, and company news (MDX-based).
+- **Documentation**: Integration with the broader Nubis documentation ecosystem.
+
+## Core Features
+- **Dynamic Content**: MDX-driven blog and marketing content.
+- **Responsive Design**: Mobile-first architecture with premium aesthetics.
+- **Micro-interactions**: High-fidelity animations and smooth transitions.
+- **Performance**: Edge-optimized rendering and aggressive asset caching.
+
+## Directory Structure
+- `/app`: Next.js App Router pages and layouts.
+- `/components`: Reusable marketing components and layout primitives.
+- `/content`: MDX files for blog posts and static pages.
+- `/public`: Static branding assets and media.
+- `/styles`: Global CSS and utility configurations.
+
+## Development
+- **Bun**: Preferred runtime and package manager.
+- **Commands**: `bun dev` (development), `bun build` (production build).
+
+## Branding
+Nubis is a product of **Nubis Cloud, Inc.**
+Console Access: [console.usenubis.com](https://console.usenubis.com)
+Support: [support@usenubis.com](mailto:support@usenubis.com)
