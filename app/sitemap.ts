@@ -6,12 +6,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Static pages
     const staticPages: MetadataRoute.Sitemap = [
+        // Homepage
         {
             url: baseUrl,
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 1,
         },
+
+        // Product pages
         {
             url: `${baseUrl}/app-platform`,
             lastModified: new Date(),
@@ -48,14 +51,38 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly',
             priority: 0.7,
         },
+
+        // Pricing
         {
             url: `${baseUrl}/pricing`,
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.8,
         },
+
+        // Blog index
+        {
+            url: `${baseUrl}/blog`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
+
+        // Company pages
         {
             url: `${baseUrl}/about`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.6,
+        },
+        {
+            url: `${baseUrl}/careers`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.6,
+        },
+        {
+            url: `${baseUrl}/community`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.6,
@@ -66,11 +93,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'yearly',
             priority: 0.5,
         },
+
+        // Legal pages
         {
-            url: `${baseUrl}/blog`,
+            url: `${baseUrl}/privacy`,
             lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 0.9,
+            changeFrequency: 'yearly',
+            priority: 0.3,
+        },
+        {
+            url: `${baseUrl}/terms`,
+            lastModified: new Date(),
+            changeFrequency: 'yearly',
+            priority: 0.3,
         },
     ]
 
