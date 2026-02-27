@@ -61,6 +61,15 @@ export function useExchangeRates() {
         }
         const symbol = symbols[currency] || "$"
 
+        const isStrongCurrency = ['USD', 'EUR', 'GBP'].includes(currency);
+
+        if (!isStrongCurrency) {
+            if (amount >= 1000) {
+                return `${symbol}${Math.ceil(amount / 1000)}k`;
+            }
+            return `${symbol}${Math.ceil(amount)}`;
+        }
+
         // Tabular numbers for better alignment in lists
         return `${symbol}${amount.toLocaleString(undefined, {
             minimumFractionDigits: amount < 100 ? 2 : 0,
