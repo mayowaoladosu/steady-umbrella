@@ -39,7 +39,7 @@ export default function F6SPage() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-                        <Link href="https://console.usenubis.com/signup" className="w-full sm:w-auto">
+                        <Link href="https://console.usenubis.com/dashboard" className="w-full sm:w-auto">
                             <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-sm font-mono tracking-widest uppercase font-bold bg-foreground text-background hover:bg-foreground/90 transition-all group overflow-hidden relative">
                                 <span className="relative z-10 flex items-center gap-2">
                                     Claim Your Credits
@@ -94,7 +94,7 @@ export default function F6SPage() {
                     <h2 className="text-3xl md:text-5xl font-serif font-black mb-8 text-foreground max-w-2xl mx-auto">
                         Ready to accelerate your startup?
                     </h2>
-                    <Link href="https://console.usenubis.com/signup">
+                    <Link href="https://console.usenubis.com/dashboard">
                         <Button size="lg" className="h-14 px-8 text-sm font-mono tracking-widest uppercase font-bold bg-[#ea580c] text-white hover:bg-[#ea580c]/90">
                             Apply Code F6SSTARTUP100
                         </Button>
