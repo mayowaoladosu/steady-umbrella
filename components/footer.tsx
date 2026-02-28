@@ -134,6 +134,9 @@ export function Footer() {
             <Link href="https://linkedin.com/company/usenubis" className="text-[10px] font-mono tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors">
               LINKEDIN
             </Link>
+            <Link href="https://www.crunchbase.com/organization/nubis-e616" className="text-[10px] font-mono tracking-widest uppercase text-muted-foreground hover:text-foreground transition-colors">
+              CRUNCHBASE
+            </Link>
           </div>
         </div>
 
